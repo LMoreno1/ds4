@@ -1,0 +1,112 @@
+﻿@model Parcial3.Models.Casos
+
+@{
+    ViewBag.Title = "Crear Nuevo Caso";
+}
+
+<h2>Crear Nuevo Caso</h2>
+
+@using (Html.BeginForm("Create", "Casos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.NumeroCaso, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.NumeroCaso, new { @class = "form-control", placeholder = "Se generará automáticamente si se deja en blanco" })
+                @Html.ValidationMessageFor(m => m.NumeroCaso, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Titulo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(m => m.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ClienteID, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ClienteID",
+                    new SelectList(ViewBag.Clientes, "ClienteID", "Nombre"),
+                    "-- Seleccione Cliente --",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClienteID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.AbogadoID, "Abogado Asignado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AbogadoID",
+                    new SelectList(ViewBag.Abogados, "UsuarioID", "NombreCompleto"),
+                    "-- Seleccione Abogado --",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.AbogadoID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Estado,
+                    new SelectList(ViewBag.Estados),
+                    "-- Seleccione Estado --",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Estado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Prioridad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Prioridad,
+                    new SelectList(ViewBag.Prioridades),
+                    "-- Seleccione Prioridad --",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Prioridad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FechaInicio, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.FechaInicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.FechaVencimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FechaVencimiento, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.FechaVencimiento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar Caso" class="btn btn-success" />
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

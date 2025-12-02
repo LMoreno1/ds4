@@ -10,7 +10,7 @@ namespace Proyecto2.Models
         [Key]
         public int Id { get; set; }
         public string Operacion { get; set; } 
-        public double Resultado { get; set; }
+        public string Resultado { get; set; }
         public DateTime FechaHora { get; set; }
 
         public Calculos() { }
