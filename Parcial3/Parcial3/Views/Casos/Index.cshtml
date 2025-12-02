@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Parcial3.Models.Casos>
+
+@{
+    ViewBag.Title = "Gestión de Casos";
+}
+
+<h2>Gestión de Casos</h2>
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Total de Casos</h5>
+                <h3>@ViewBag.TotalCasos</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Casos Activos</h5>
+                <h3>@ViewBag.CasosActivos</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Crear Nuevo Caso", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número de Caso</th>
+            <th>Título</th>
+            <th>Cliente</th>
+            <th>Abogado</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+            <th>Fecha Inicio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var caso in Model)
+        {
+            <tr>
+                <td>@caso.NumeroCaso</td>
+                <td>@caso.Titulo</td>
+                <td>@(caso.Cliente != null ? caso.Cliente.Nombre + " " + caso.Cliente.Apellido : "N/A")</td>
+                <td>@(caso.Abogado != null ? caso.Abogado.NombreCompleto : "N/A")</td>
+                <td>
+                    <span class="badge badge-info">@caso.Estado</span>
+                </td>
+                <td>
+                    <span class="badge badge-@(caso.Prioridad == "Alta" ? "danger" : caso.Prioridad == "Media" ? "warning" : "secondary")">
+                        @caso.Prioridad
+                    </span>
+                </td>
+                <td>@caso.FechaInicio.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @Html.ActionLink("Detalles", "Details", new { id = caso.CasoID }, new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Editar", "Edit", new { id = caso.CasoID }, new { @class = "btn btn-sm btn-warning" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

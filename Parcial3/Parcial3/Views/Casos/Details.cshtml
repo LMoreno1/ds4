@@ -1,0 +1,54 @@
+﻿@model Parcial3.Models.Casos
+
+@{
+    ViewBag.Title = "Detalles del Caso";
+}
+
+<h2>Detalles del Caso</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Número de Caso</dt>
+        <dd>@Model.NumeroCaso</dd>
+
+        <dt>Título</dt>
+        <dd>@Model.Titulo</dd>
+
+        <dt>Descripción</dt>
+        <dd>@Model.Descripcion</dd>
+
+        <dt>Cliente</dt>
+        <dd>@(Model.Cliente != null ? Model.Cliente.Nombre + " " + Model.Cliente.Apellido : "N/A")</dd>
+
+        <dt>Abogado Asignado</dt>
+        <dd>@(Model.Abogado != null ? Model.Abogado.NombreCompleto : "N/A")</dd>
+
+        <dt>Estado</dt>
+        <dd><span class="badge badge-info">@Model.Estado</span></dd>
+
+        <dt>Prioridad</dt>
+        <dd>
+            <span class="badge badge-@(Model.Prioridad == "Alta" ? "danger" : Model.Prioridad == "Media" ? "warning" : "secondary")">
+                @Model.Prioridad
+            </span>
+        </dd>
+
+        <dt>Fecha de Inicio</dt>
+        <dd>@Model.FechaInicio.ToString("dd/MM/yyyy")</dd>
+
+        <dt>Fecha de Vencimiento</dt>
+        <dd>@(Model.FechaVencimiento.HasValue ? Model.FechaVencimiento.Value.ToString("dd/MM/yyyy") : "No definida")</dd>
+
+        <dt>Fecha de Creación</dt>
+        <dd>@Model.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</dd>
+
+        <dt>Última Modificación</dt>
+        <dd>@(Model.FechaModificacion.HasValue ? Model.FechaModificacion.Value.ToString("dd/MM/yyyy HH:mm") : "Nunca")</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.CasoID }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default" })
+</p>

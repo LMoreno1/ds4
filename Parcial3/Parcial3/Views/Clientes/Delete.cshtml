@@ -1,0 +1,43 @@
+﻿@model Parcial3.Models.Clientes
+
+@{
+    ViewBag.Title = "Eliminar Cliente";
+}
+
+<h2>Eliminar Cliente</h2>
+
+<h3 class="text-danger">¿Está seguro que desea eliminar este cliente?</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.Nombre)</dt>
+        <dd>@Html.DisplayFor(m => m.Nombre) @Html.DisplayFor(m => m.Apellido)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Identificacion)</dt>
+        <dd>@Html.DisplayFor(m => m.Identificacion)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Telefono)</dt>
+        <dd>@Html.DisplayFor(m => m.Telefono)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Email)</dt>
+        <dd>@Html.DisplayFor(m => m.Email)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.TipoCliente)</dt>
+        <dd>@Html.DisplayFor(m => m.TipoCliente)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.FechaRegistro)</dt>
+        <dd>@Model.FechaRegistro.ToString("dd/MM/yyyy")</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Clientes", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ClienteID)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

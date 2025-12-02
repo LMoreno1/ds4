@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Parcial3.Models.Clientes>
+
+@{
+    ViewBag.Title = "Gestión de Clientes";
+}
+
+<h2>Gestión de Clientes</h2>
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5>Total de Clientes</h5>
+                <h3>@ViewBag.TotalClientes</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Registrar Nuevo Cliente", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre Completo</th>
+            <th>Identificación</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Tipo Cliente</th>
+            <th>Fecha Registro</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>@cliente.Nombre @cliente.Apellido</td>
+                <td>@cliente.Identificacion</td>
+                <td>@cliente.Telefono</td>
+                <td>@cliente.Email</td>
+                <td>@cliente.TipoCliente</td>
+                <td>@cliente.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @Html.ActionLink("Detalles", "Details", new { id = cliente.ClienteID }, new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Editar", "Edit", new { id = cliente.ClienteID }, new { @class = "btn btn-sm btn-warning" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
